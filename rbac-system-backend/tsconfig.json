@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    // ── Output ──────────────────────────────────────────────────────────────
+    "rootDir": "./src",
+    "outDir": "./dist",
+
+    // ── Module System (Node ESM) ─────────────────────────────────────────────
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "target": "ES2022",
+
+    // ── Type Sources ─────────────────────────────────────────────────────────
+    "types": ["node"],
+    "lib": ["ES2022"],
+
+    // ── Emit ─────────────────────────────────────────────────────────────────
+    // No declaration files — this is a backend app, not a library.
+    "sourceMap": true,
+    "esModuleInterop": true,
+
+    // ── Strict Type Checking ─────────────────────────────────────────────────
+    "strict": true,
+
+    // ── Module Compliance ────────────────────────────────────────────────────
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+
+    // ── Misc ─────────────────────────────────────────────────────────────────
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "src/scripts"]
+}
