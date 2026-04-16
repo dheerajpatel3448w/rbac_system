@@ -93,12 +93,9 @@ const userSchema = new Schema<IUser, UserModel, IUserMethods>(
       },
     },
     toObject: {
-      transform: (_doc, ret: Record<string, unknown>) => {
-        delete ret["password"];
-        delete ret["refreshToken"];
-        delete ret["__v"];
-        return ret;
-      },
+      // No transform here — toObject is for internal use.
+      // Sensitive field stripping only happens in toJSON (API responses).
+      virtuals: false,
     },
   }
 );
