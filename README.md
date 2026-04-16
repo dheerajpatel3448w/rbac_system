@@ -98,6 +98,13 @@ Simply run:
 ```bash
 docker-compose up --build -d
 ```
+
+### Initial Database Seed (Docker)
+Because Docker creates a completely blank database, you must immediately create the Super Admin account so you can log in. Run this specific command to safely trigger the seed script within the production container:
+```bash
+docker-compose exec backend pnpm run seed:prod
+```
+
 - The frontend will be accessible at **http://localhost:3000** (or `http://localhost:5173` if mapped locally).
 - The backend API will be accessible at **http://localhost:5000**.
 - The isolated MongoDB instance will be automatically spun up and connected.
