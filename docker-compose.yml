@@ -1,0 +1,51 @@
+version: "3.8"
+
+services:
+  backend:
+    build: 
+      context: ./rbac-system-backend
+      dockerfile: Dockerfile
+    container_name: backend
+    ports:
+      - "5000:5000"
+    environment:
+      # Point to the isolated mongo container
+      - MONGODB_URI=mongodb://mongo:27017
+      - DB_NAME=userManagement
+      # Static fallback values so you don't need your real .env file
+      - JWT_ACCESS_SECRET=default_access_secret
+      - JWT_REFRESH_SECRET=default_refresh_secret
+      - JWT_ACCESS_EXPIRES_IN=15m
+      - JWT_REFRESH_EXPIRES_IN=7d
+      - PORT=5000
+      - NODE_ENV=production
+      - FRONTEND_URL=http://localhost:3000
+    depends_on:
+      - mongo
+
+  frontend:
+    build: 
+      context: ./rbac-system-frontend
+      dockerfile: Dockerfile
+      args:
+        # Pass the Vite API URL so build bakes it into the static assets
+        - VITE_API_URL=http://localhost:5000
+    container_name: frontend
+    ports:
+      # Expose the app on port 3000 (Host : Internal Nginx container)
+      - "3000:80"
+    environment:
+      - VITE_API_URL=http://localhost:5000
+    depends_on:
+      - backend
+
+  mongo:
+    image: mongo
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:

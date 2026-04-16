@@ -243,6 +243,31 @@ export function LoginPage() {
             </p>
           </motion.div>
 
+          {/* Admin Demo Credentials Box */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.3 }}
+            style={{
+              background: 'hsl(265 80% 60% / 0.1)',
+              border: '1px dashed hsl(265 80% 60% / 0.3)',
+              borderRadius: 12,
+              padding: '12px 16px',
+              marginBottom: 20,
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 4
+            }}
+          >
+            <p style={{ fontSize: '0.75rem', color: 'hsl(265 80% 70%)', fontWeight: 600, margin: 0, display: 'flex', alignItems: 'center', gap: 6 }}>
+              <Shield size={12} /> Super Admin Credentials
+            </p>
+            <p style={{ fontSize: '0.8rem', color: 'hsl(240 5% 70%)', margin: 0, lineHeight: 1.5 }}>
+              Email: <strong style={{ color: 'hsl(240 5% 90%)' }}>admin@purplemerit.com</strong><br/>
+              Password: <strong style={{ color: 'hsl(240 5% 90%)' }}>Admin@123456</strong>
+            </p>
+          </motion.div>
+
           {/* Form */}
           <form onSubmit={handleSubmit(onSubmit)} style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
             {/* Email */}

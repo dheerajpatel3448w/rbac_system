@@ -57,17 +57,21 @@ type EditData = z.infer<typeof editSchema>;
 // ─── Status Badge ─────────────────────────────────────────────────────────────
 function StatusBadge({ status }: { status: Status }) {
   const cfg = {
-    active:    { bg: 'hsl(142 70% 45% / 0.15)', color: 'hsl(142 70% 55%)', dot: 'hsl(142 70% 45%)' },
-    suspended: { bg: 'hsl(38 92% 50% / 0.15)',  color: 'hsl(38 92% 60%)',  dot: 'hsl(38 92% 50%)' },
-    inactive:  { bg: 'hsl(0 72% 51% / 0.15)',   color: 'hsl(0 72% 65%)',   dot: 'hsl(0 72% 51%)' },
+    active: { bg: 'hsl(142 70% 45% / 0.15)', color: 'hsl(142 70% 55%)', dot: 'hsl(142 70% 45%)' },
+    suspended: { bg: 'hsl(38 92% 50% / 0.15)', color: 'hsl(38 92% 60%)', dot: 'hsl(38 92% 50%)' },
+    inactive: { bg: 'hsl(0 72% 51% / 0.15)', color: 'hsl(0 72% 65%)', dot: 'hsl(0 72% 51%)' },
   }[status];
 
   return (
-    <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '3px 10px',
+    <span style={{
+      display: 'inline-flex', alignItems: 'center', gap: 6, padding: '3px 10px',
       borderRadius: 9999, fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.05em',
-      textTransform: 'uppercase', background: cfg.bg, color: cfg.color, border: `1px solid ${cfg.dot}33` }}>
-      <span style={{ width: 6, height: 6, borderRadius: '50%', background: cfg.dot,
-        display: 'inline-block', boxShadow: `0 0 6px ${cfg.dot}` }} />
+      textTransform: 'uppercase', background: cfg.bg, color: cfg.color, border: `1px solid ${cfg.dot}33`
+    }}>
+      <span style={{
+        width: 6, height: 6, borderRadius: '50%', background: cfg.dot,
+        display: 'inline-block', boxShadow: `0 0 6px ${cfg.dot}`
+      }} />
       {status}
     </span>
   );
@@ -79,13 +83,17 @@ function Modal({ open, onClose, children }: { open: boolean; onClose: () => void
   return (
     <div
       onClick={onClose}
-      style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.75)',
-        backdropFilter: 'blur(4px)', zIndex: 200, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+      style={{
+        position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.75)',
+        backdropFilter: 'blur(4px)', zIndex: 200, display: 'flex', alignItems: 'center', justifyContent: 'center'
+      }}
     >
       <div onClick={(e) => e.stopPropagation()}
-        style={{ width: 480, maxWidth: '95vw', background: 'hsl(240 8% 10%)',
+        style={{
+          width: 480, maxWidth: '95vw', background: 'hsl(240 8% 10%)',
           border: '1px solid hsl(265 80% 60% / 0.3)', borderRadius: 20,
-          padding: 32, boxShadow: '0 24px 80px rgba(0,0,0,0.6)', position: 'relative' }}>
+          padding: 32, boxShadow: '0 24px 80px rgba(0,0,0,0.6)', position: 'relative'
+        }}>
         {children}
       </div>
     </div>
@@ -96,8 +104,10 @@ function Modal({ open, onClose, children }: { open: boolean; onClose: () => void
 function Field({ label, error, children }: { label: string; error?: string; children: React.ReactNode }) {
   return (
     <div>
-      <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 500,
-        color: 'hsl(240 5% 70%)', marginBottom: 6 }}>{label}</label>
+      <label style={{
+        display: 'block', fontSize: '0.8rem', fontWeight: 500,
+        color: 'hsl(240 5% 70%)', marginBottom: 6
+      }}>{label}</label>
       {children}
       {error && <p style={{ marginTop: 4, fontSize: '0.75rem', color: 'hsl(0 72% 60%)' }}>{error}</p>}
     </div>
@@ -134,9 +144,11 @@ function CreateUserModal({ onClose, onSuccess }: { onClose: () => void; onSucces
           <p style={{ fontSize: '0.8rem', color: 'hsl(240 5% 55%)', marginTop: 4 }}>Add a new user to the system</p>
         </div>
         <button type="button" onClick={onClose}
-          style={{ width: 32, height: 32, borderRadius: '50%', background: 'hsl(240 8% 16%)',
+          style={{
+            width: 32, height: 32, borderRadius: '50%', background: 'hsl(240 8% 16%)',
             border: '1px solid hsl(240 10% 24%)', display: 'flex', alignItems: 'center',
-            justifyContent: 'center', cursor: 'pointer' }}>
+            justifyContent: 'center', cursor: 'pointer'
+          }}>
           <X size={16} style={{ color: 'hsl(240 5% 60%)' }} />
         </button>
       </div>
@@ -161,17 +173,21 @@ function CreateUserModal({ onClose, onSuccess }: { onClose: () => void; onSucces
 
         <div style={{ display: 'flex', gap: 12, marginTop: 8 }}>
           <button type="button" onClick={onClose}
-            style={{ flex: 1, padding: '11px', borderRadius: 10, background: 'hsl(240 8% 16%)',
+            style={{
+              flex: 1, padding: '11px', borderRadius: 10, background: 'hsl(240 8% 16%)',
               border: '1px solid hsl(240 10% 24%)', color: 'hsl(240 5% 60%)', fontSize: '0.875rem',
-              fontWeight: 600, cursor: 'pointer' }}>
+              fontWeight: 600, cursor: 'pointer'
+            }}>
             Cancel
           </button>
           <button type="submit" disabled={mut.isPending}
-            style={{ flex: 1, padding: '11px', borderRadius: 10,
+            style={{
+              flex: 1, padding: '11px', borderRadius: 10,
               background: 'linear-gradient(135deg, hsl(265 80% 60%), hsl(230 70% 55%))',
               border: 'none', color: 'white', fontSize: '0.875rem', fontWeight: 700,
               cursor: mut.isPending ? 'not-allowed' : 'pointer', opacity: mut.isPending ? 0.7 : 1,
-              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
+              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8
+            }}>
             {mut.isPending ? <><Loader2 size={14} style={{ animation: 'my-spin 1s linear infinite' }} /> Creating...</> : 'Create User'}
           </button>
         </div>
@@ -202,9 +218,11 @@ function EditUserModal({ user, onClose, onSuccess, currentUserRole }: { user: Us
           <p style={{ fontSize: '0.8rem', color: 'hsl(240 5% 55%)', marginTop: 4 }}>Update details for {user.name}</p>
         </div>
         <button type="button" onClick={onClose}
-          style={{ width: 32, height: 32, borderRadius: '50%', background: 'hsl(240 8% 16%)',
+          style={{
+            width: 32, height: 32, borderRadius: '50%', background: 'hsl(240 8% 16%)',
             border: '1px solid hsl(240 10% 24%)', display: 'flex', alignItems: 'center',
-            justifyContent: 'center', cursor: 'pointer' }}>
+            justifyContent: 'center', cursor: 'pointer'
+          }}>
           <X size={16} style={{ color: 'hsl(240 5% 60%)' }} />
         </button>
       </div>
@@ -233,17 +251,21 @@ function EditUserModal({ user, onClose, onSuccess, currentUserRole }: { user: Us
 
         <div style={{ display: 'flex', gap: 12, marginTop: 8 }}>
           <button type="button" onClick={onClose}
-            style={{ flex: 1, padding: '11px', borderRadius: 10, background: 'hsl(240 8% 16%)',
+            style={{
+              flex: 1, padding: '11px', borderRadius: 10, background: 'hsl(240 8% 16%)',
               border: '1px solid hsl(240 10% 24%)', color: 'hsl(240 5% 60%)', fontSize: '0.875rem',
-              fontWeight: 600, cursor: 'pointer' }}>
+              fontWeight: 600, cursor: 'pointer'
+            }}>
             Cancel
           </button>
           <button type="submit" disabled={mut.isPending}
-            style={{ flex: 1, padding: '11px', borderRadius: 10,
+            style={{
+              flex: 1, padding: '11px', borderRadius: 10,
               background: 'linear-gradient(135deg, hsl(265 80% 60%), hsl(230 70% 55%))',
               border: 'none', color: 'white', fontSize: '0.875rem', fontWeight: 700,
               cursor: mut.isPending ? 'not-allowed' : 'pointer', opacity: mut.isPending ? 0.7 : 1,
-              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
+              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8
+            }}>
             {mut.isPending ? <><Loader2 size={14} style={{ animation: 'my-spin 1s linear infinite' }} /> Saving...</> : 'Save Changes'}
           </button>
         </div>
@@ -257,8 +279,10 @@ function DeleteModal({ user, onClose, onConfirm, isPending }: { user: User; onCl
   return (
     <>
       <div style={{ textAlign: 'center' }}>
-        <div style={{ width: 56, height: 56, borderRadius: '50%', background: 'hsl(0 72% 51% / 0.15)',
-          display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
+        <div style={{
+          width: 56, height: 56, borderRadius: '50%', background: 'hsl(0 72% 51% / 0.15)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px'
+        }}>
           <Trash2 size={24} style={{ color: 'hsl(0 72% 65%)' }} />
         </div>
         <h2 style={{ fontFamily: 'Outfit, sans-serif', fontSize: '1.2rem', fontWeight: 800, marginBottom: 8 }}>Delete User</h2>
@@ -267,14 +291,18 @@ function DeleteModal({ user, onClose, onConfirm, isPending }: { user: User; onCl
         </p>
         <div style={{ display: 'flex', gap: 12 }}>
           <button type="button" onClick={onClose}
-            style={{ flex: 1, padding: '11px', borderRadius: 10, background: 'hsl(240 8% 16%)',
-              border: '1px solid hsl(240 10% 24%)', color: 'hsl(240 5% 60%)', cursor: 'pointer', fontWeight: 600 }}>
+            style={{
+              flex: 1, padding: '11px', borderRadius: 10, background: 'hsl(240 8% 16%)',
+              border: '1px solid hsl(240 10% 24%)', color: 'hsl(240 5% 60%)', cursor: 'pointer', fontWeight: 600
+            }}>
             Cancel
           </button>
           <button type="button" onClick={onConfirm} disabled={isPending}
-            style={{ flex: 1, padding: '11px', borderRadius: 10, background: 'hsl(0 72% 45%)',
+            style={{
+              flex: 1, padding: '11px', borderRadius: 10, background: 'hsl(0 72% 45%)',
               border: 'none', color: 'white', cursor: isPending ? 'not-allowed' : 'pointer', fontWeight: 600,
-              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
+              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8
+            }}>
             {isPending ? <><Loader2 size={14} style={{ animation: 'my-spin 1s linear infinite' }} /> Deleting...</> : 'Delete'}
           </button>
         </div>
@@ -308,6 +336,7 @@ export function UserListPage() {
     },
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ['users'] });
+      qc.invalidateQueries({ queryKey: ['users-dashboard'] });
       toast.success('User deleted successfully');
       setModal(null);
       setSelectedUser(null);
@@ -320,11 +349,13 @@ export function UserListPage() {
       header: 'User',
       cell: (info) => (
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          <div style={{ width: 36, height: 36, borderRadius: '50%', flexShrink: 0,
+          <div style={{
+            width: 36, height: 36, borderRadius: '50%', flexShrink: 0,
             background: 'linear-gradient(135deg, hsl(265 80% 60%), hsl(230 70% 55%))',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             fontSize: '0.7rem', fontWeight: 700, color: 'white',
-            boxShadow: '0 0 10px hsl(265 80% 60% / 0.3)' }}>
+            boxShadow: '0 0 10px hsl(265 80% 60% / 0.3)'
+          }}>
             {info.getValue().charAt(0).toUpperCase()}
           </div>
           <div>
@@ -351,7 +382,10 @@ export function UserListPage() {
       header: 'Actions',
       cell: (info) => {
         const targetRole = info.row.original.role;
-        const canEdit = isAdmin || (currentUser?.role === 'manager' && targetRole !== 'admin');
+        const targetId = info.row.original._id;
+        const isSelf = currentUser?._id === targetId;
+
+        const canEdit = isAdmin || (currentUser?.role === 'manager' && targetRole === 'user');
 
         return (
           <div style={{ display: 'flex', gap: 8 }}>
@@ -359,19 +393,23 @@ export function UserListPage() {
               <button
                 type="button"
                 onClick={() => { setSelectedUser(info.row.original); setModal('edit'); }}
-                style={{ width: 32, height: 32, borderRadius: 8, background: 'hsl(265 80% 60% / 0.15)',
+                style={{
+                  width: 32, height: 32, borderRadius: 8, background: 'hsl(265 80% 60% / 0.15)',
                   border: '1px solid hsl(265 80% 60% / 0.3)', display: 'flex', alignItems: 'center',
-                  justifyContent: 'center', cursor: 'pointer' }}>
+                  justifyContent: 'center', cursor: 'pointer'
+                }}>
                 <Edit3 size={14} style={{ color: 'hsl(265 80% 70%)' }} />
               </button>
             )}
-            {isAdmin && (
+            {isAdmin && !isSelf && (
               <button
                 type="button"
                 onClick={() => { setSelectedUser(info.row.original); setModal('delete'); }}
-                style={{ width: 32, height: 32, borderRadius: 8, background: 'hsl(0 72% 51% / 0.12)',
+                style={{
+                  width: 32, height: 32, borderRadius: 8, background: 'hsl(0 72% 51% / 0.12)',
                   border: '1px solid hsl(0 72% 51% / 0.25)', display: 'flex', alignItems: 'center',
-                  justifyContent: 'center', cursor: 'pointer' }}>
+                  justifyContent: 'center', cursor: 'pointer'
+                }}>
                 <Trash2 size={14} style={{ color: 'hsl(0 72% 65%)' }} />
               </button>
             )}
@@ -397,7 +435,10 @@ export function UserListPage() {
   });
 
   const closeModal = () => { setModal(null); setSelectedUser(null); };
-  const refreshUsers = () => qc.invalidateQueries({ queryKey: ['users'] });
+  const refreshUsers = () => {
+    qc.invalidateQueries({ queryKey: ['users'] });
+    qc.invalidateQueries({ queryKey: ['users-dashboard'] });
+  };
 
   return (
     <AnimatedPage>
@@ -418,10 +459,12 @@ export function UserListPage() {
             whileHover={{ scale: 1.04, boxShadow: '0 8px 30px hsl(265 80% 60% / 0.4)' }}
             whileTap={{ scale: 0.96 }}
             onClick={() => setModal('create')}
-            style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '12px 22px', borderRadius: 12,
+            style={{
+              display: 'flex', alignItems: 'center', gap: 8, padding: '12px 22px', borderRadius: 12,
               background: 'linear-gradient(135deg, hsl(265 80% 60%), hsl(230 70% 55%))', border: 'none',
               color: 'white', fontSize: '0.9rem', fontWeight: 700, cursor: 'pointer',
-              boxShadow: '0 4px 20px hsl(265 80% 60% / 0.3)' }}
+              boxShadow: '0 4px 20px hsl(265 80% 60% / 0.3)'
+            }}
           >
             <Plus size={18} /> Add User
           </motion.button>
@@ -436,9 +479,11 @@ export function UserListPage() {
             value={globalFilter}
             onChange={(e) => setGlobalFilter(e.target.value)}
             placeholder="Search users..."
-            style={{ width: '100%', padding: '10px 14px 10px 42px', background: 'hsl(240 8% 12%)',
+            style={{
+              width: '100%', padding: '10px 14px 10px 42px', background: 'hsl(240 8% 12%)',
               border: '1px solid hsl(240 10% 22%)', borderRadius: 10, color: 'hsl(240 5% 96%)',
-              fontSize: '0.875rem', outline: 'none', boxSizing: 'border-box' }}
+              fontSize: '0.875rem', outline: 'none', boxSizing: 'border-box'
+            }}
           />
         </div>
       </div>
@@ -459,10 +504,12 @@ export function UserListPage() {
                 <tr key={hg.id} style={{ borderBottom: '1px solid hsl(240 10% 16%)' }}>
                   {hg.headers.map((header) => (
                     <th key={header.id} onClick={header.column.getToggleSortingHandler()}
-                      style={{ padding: '14px 20px', textAlign: 'left', fontSize: '0.75rem',
+                      style={{
+                        padding: '14px 20px', textAlign: 'left', fontSize: '0.75rem',
                         fontWeight: 600, letterSpacing: '0.05em', textTransform: 'uppercase',
                         color: 'hsl(240 5% 50%)', cursor: header.column.getCanSort() ? 'pointer' : 'default',
-                        userSelect: 'none', whiteSpace: 'nowrap' }}>
+                        userSelect: 'none', whiteSpace: 'nowrap'
+                      }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                         {flexRender(header.column.columnDef.header, header.getContext())}
                         {header.column.getIsSorted() === 'asc' && <ChevronUp size={12} />}
@@ -474,52 +521,58 @@ export function UserListPage() {
               ))}
             </thead>
             <tbody>
-                {table.getRowModel().rows.length === 0 ? (
-                  <tr>
-                    <td colSpan={memoizedColumns.length} style={{ padding: '60px 20px', textAlign: 'center' }}>
-                      <Users size={48} style={{ color: 'hsl(240 5% 30%)', margin: '0 auto 12px', display: 'block' }} />
-                      <p style={{ color: 'hsl(240 5% 45%)' }}>No users found</p>
-                    </td>
+              {table.getRowModel().rows.length === 0 ? (
+                <tr>
+                  <td colSpan={memoizedColumns.length} style={{ padding: '60px 20px', textAlign: 'center' }}>
+                    <Users size={48} style={{ color: 'hsl(240 5% 30%)', margin: '0 auto 12px', display: 'block' }} />
+                    <p style={{ color: 'hsl(240 5% 45%)' }}>No users found</p>
+                  </td>
+                </tr>
+              ) : (
+                table.getRowModel().rows.map((row) => (
+                  <tr key={row.id}
+                    style={{ borderBottom: '1px solid hsl(240 10% 14%)' }}
+                    onMouseEnter={(e) => { (e.currentTarget as HTMLTableRowElement).style.background = 'hsl(240 8% 13%)'; }}
+                    onMouseLeave={(e) => { (e.currentTarget as HTMLTableRowElement).style.background = 'transparent'; }}
+                  >
+                    {row.getVisibleCells().map((cell) => (
+                      <td key={cell.id} style={{ padding: '14px 20px' }}>
+                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                      </td>
+                    ))}
                   </tr>
-                ) : (
-                  table.getRowModel().rows.map((row) => (
-                    <tr key={row.id}
-                      style={{ borderBottom: '1px solid hsl(240 10% 14%)' }}
-                      onMouseEnter={(e) => { (e.currentTarget as HTMLTableRowElement).style.background = 'hsl(240 8% 13%)'; }}
-                      onMouseLeave={(e) => { (e.currentTarget as HTMLTableRowElement).style.background = 'transparent'; }}
-                    >
-                      {row.getVisibleCells().map((cell) => (
-                        <td key={cell.id} style={{ padding: '14px 20px' }}>
-                          {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                        </td>
-                      ))}
-                    </tr>
-                  ))
-                )}
+                ))
+              )}
             </tbody>
           </table>
         )}
 
         {/* Pagination */}
         {!isLoading && table.getPageCount() > 1 && (
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-            padding: '16px 20px', borderTop: '1px solid hsl(240 10% 16%)' }}>
+          <div style={{
+            display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+            padding: '16px 20px', borderTop: '1px solid hsl(240 10% 16%)'
+          }}>
             <p style={{ fontSize: '0.8rem', color: 'hsl(240 5% 50%)' }}>
               Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
             </p>
             <div style={{ display: 'flex', gap: 8 }}>
               <button type="button" onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}
-                style={{ width: 32, height: 32, borderRadius: 8, background: 'hsl(240 8% 14%)',
+                style={{
+                  width: 32, height: 32, borderRadius: 8, background: 'hsl(240 8% 14%)',
                   border: '1px solid hsl(240 10% 22%)', display: 'flex', alignItems: 'center',
                   justifyContent: 'center', cursor: table.getCanPreviousPage() ? 'pointer' : 'not-allowed',
-                  opacity: table.getCanPreviousPage() ? 1 : 0.4 }}>
+                  opacity: table.getCanPreviousPage() ? 1 : 0.4
+                }}>
                 <ChevronLeft size={16} style={{ color: 'hsl(240 5% 60%)' }} />
               </button>
               <button type="button" onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}
-                style={{ width: 32, height: 32, borderRadius: 8, background: 'hsl(240 8% 14%)',
+                style={{
+                  width: 32, height: 32, borderRadius: 8, background: 'hsl(240 8% 14%)',
                   border: '1px solid hsl(240 10% 22%)', display: 'flex', alignItems: 'center',
                   justifyContent: 'center', cursor: table.getCanNextPage() ? 'pointer' : 'not-allowed',
-                  opacity: table.getCanNextPage() ? 1 : 0.4 }}>
+                  opacity: table.getCanNextPage() ? 1 : 0.4
+                }}>
                 <ChevronRight size={16} style={{ color: 'hsl(240 5% 60%)' }} />
               </button>
             </div>

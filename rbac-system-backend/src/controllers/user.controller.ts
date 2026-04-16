@@ -22,7 +22,15 @@ import type {
 export const getAllUsers = TryCatch(
   async (req: Request, res: Response, _next: NextFunction): Promise<void> => {
     const query = req.query as unknown as PaginationInput;
-    const result = await findAllUsers(query);
+    const requesterRole = req.user?.role;
+
+    // Managers should only be able to view standard User accounts.
+    if (requesterRole === Role.MANAGER) {
+      // Forcibly apply the role filter so they cannot retrieve Admins or other Managers
+      (query as any).role = Role.USER;
+    }
+
+    const result = await findAllUsers(query as any);
 
     res.status(200).json({
       success: true,
@@ -110,8 +118,8 @@ export const updateUser = TryCatch(
 
     // ── Manager restrictions ──
     if (requesterRole === Role.MANAGER) {
-      if (targetUser.role === Role.ADMIN) {
-        next(new ErrorHandler(403, "Managers cannot modify Admin accounts"));
+      if (targetUser.role !== Role.USER) {
+        next(new ErrorHandler(403, "Managers can only modify User accounts"));
         return;
       }
       // Managers cannot change role or status — strip those fields

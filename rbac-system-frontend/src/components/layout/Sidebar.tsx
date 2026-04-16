@@ -1,5 +1,6 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useQueryClient } from '@tanstack/react-query';
 import {
   LayoutDashboard,
   Users,
@@ -39,6 +40,7 @@ export function Sidebar() {
   const { user, logout } = useAuthStore();
   const { sidebarOpen, toggleSidebar } = useUIStore();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const filteredNav = navItems.filter(
     (item) => user && item.roles.includes(user.role)
@@ -50,6 +52,7 @@ export function Sidebar() {
     } catch {
       /* ignore */
     } finally {
+      queryClient.clear(); // Instantly clear cached profile/user data
       logout();
       navigate('/login');
       toast.success('Logged out successfully');
